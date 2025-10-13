@@ -15,8 +15,18 @@ job = input('enter current job: ')
 
 for i in range(len(df[day])):
     if df[day][i] == job or df[day][i] == 'OJ' + job:
-        work.append(read.extract(df['DAYS'][i]))
+        rank, name = read.extract(df['DAYS'][i])
+        if df[day][i] == 'OJ' + job:
+            name += ' (OJT)'
+        work.append((rank, name))
         
 work.sort(key=lambda i : (-ranks[i[0]], i[1]))
+
+text = ''
+lead = work[0][0] + ' ' + work[0][1]
 for i in work:
-    print(i[0] + ' ' + i[1])
+    text += i[0] + ' ' + i[1] + '\n'
+    
+format = f'단결! {lead} 평택 패트롤 데이 출근 보고드립니다.\n근무자:\n' + text + f'총기 및 탄 드로우 이상 없습니다.\n근무자 건강특이사항: 이상 없습니다.\n단결!\n\n단결! {lead} 평택 패트롤 데이 퇴근 보고드립니다.\n근무자:\n' + text + '총기 및 탄 반납 이상 없습니다.\n근무자 건강특이사항: 이상 없습니다.\n단결!'
+       
+print(format)
