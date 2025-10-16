@@ -10,7 +10,7 @@ def extract(text):
   name = match.group(2).strip()
   rank = match.group(1)
   if name in senior:
-    return '선임병장 ' + ranks[rank], name
+    return '선임병장 ', name
   
   if match:
     return ranks[rank], name
